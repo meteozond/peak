@@ -55,12 +55,14 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
-    'cities_light',
+    "cities_light",
+    "phonenumber_field",
 ]
 
 LOCAL_APPS = [
     "peak.users.apps.UsersConfig",
     "peak.addresses.apps.AddressesConfig",
+    "peak.companies.apps.CompaniesConfig",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -228,3 +230,7 @@ CITIES_LIGHT_INCLUDE_COUNTRIES = ['RU']
 CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG',
                                    'PPLL', 'PPLR', 'PPLS', 'STLMT', ]
 CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities500.zip', ]
+
+# phonenumber_field
+# -------------------------------------------------------------------------------
+PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
