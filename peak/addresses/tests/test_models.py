@@ -1,15 +1,11 @@
 from django.test import TestCase
 
-from peak.addresses.tests.factories import AddressFactory
 from peak.addresses.models import Address
+from peak.addresses.tests.factories import AddressFactory
+from peak.core.tests.mixins import AddressTestMixin
 
 
-class TestAddress(TestCase):
-    fixtures = [
-        'fixtures/countries.json',
-        'fixtures/regions.json',
-        'fixtures/cities.json',
-    ]
+class TestAddress(AddressTestMixin, TestCase):
 
     def test_factory(self):
         AddressFactory.create_batch(5)
