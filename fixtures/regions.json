@@ -1,0 +1,128 @@
+[
+{
+    "model": "cities_light.region",
+    "pk": 2,
+    "fields": {
+        "name": "Voronezj",
+        "name_ascii": "Voronezj",
+        "slug": "voronezj",
+        "geoname_id": 472039,
+        "alternate_names": "Воронежская Область;Воронежская область",
+        "display_name": "Voronezj, Russia",
+        "geoname_code": "86",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 7,
+    "fields": {
+        "name": "Tver’ Oblast",
+        "name_ascii": "Tver' Oblast",
+        "slug": "tver-oblast",
+        "geoname_id": 480041,
+        "alternate_names": "Тверская Область;Тверская область",
+        "display_name": "Tver’ Oblast, Russia",
+        "geoname_code": "77",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 15,
+    "fields": {
+        "name": "Ryazan Oblast",
+        "name_ascii": "Ryazan Oblast",
+        "slug": "ryazan-oblast",
+        "geoname_id": 500059,
+        "alternate_names": "Рязанская Область;Рязанская область",
+        "display_name": "Ryazan Oblast, Russia",
+        "geoname_code": "62",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 16,
+    "fields": {
+        "name": "Rostov",
+        "name_ascii": "Rostov",
+        "slug": "rostov",
+        "geoname_id": 501165,
+        "alternate_names": "Rostov Oblast;Rostovskaya Oblast;Ростовская Область;Ростовская область",
+        "display_name": "Rostov, Russia",
+        "geoname_code": "61",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 17,
+    "fields": {
+        "name": "Pskov Oblast",
+        "name_ascii": "Pskov Oblast",
+        "slug": "pskov-oblast",
+        "geoname_id": 504338,
+        "alternate_names": "Псковская Область;Псковская область",
+        "display_name": "Pskov Oblast, Russia",
+        "geoname_code": "60",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 18,
+    "fields": {
+        "name": "Perm",
+        "name_ascii": "Perm",
+        "slug": "perm",
+        "geoname_id": 511180,
+        "alternate_names": "Пермский край",
+        "display_name": "Perm, Russia",
+        "geoname_code": "90",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 28,
+    "fields": {
+        "name": "Mordoviya Republic",
+        "name_ascii": "Mordoviya Republic",
+        "slug": "mordoviya-republic",
+        "geoname_id": 525369,
+        "alternate_names": "Мордовская республика;Республика Мордовия",
+        "display_name": "Mordoviya Republic, Russia",
+        "geoname_code": "46",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 29,
+    "fields": {
+        "name": "Mariy-El Republic",
+        "name_ascii": "Mariy-El Republic",
+        "slug": "mariy-el-republic",
+        "geoname_id": 529352,
+        "alternate_names": "Марий-Эл;Республика Марий Эл;Республика Марий-Эл",
+        "display_name": "Mariy-El Republic, Russia",
+        "geoname_code": "45",
+        "country": 1
+    }
+},
+{
+    "model": "cities_light.region",
+    "pk": 56,
+    "fields": {
+        "name": "Vladimir",
+        "name_ascii": "Vladimir",
+        "slug": "vladimir",
+        "geoname_id": 826294,
+        "alternate_names": "Владимирская область",
+        "display_name": "Vladimir, Russia",
+        "geoname_code": "83",
+        "country": 1
+    }
+}
+]

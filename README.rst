@@ -48,6 +48,10 @@ The following details how to deploy this application.
     $ docker-compose -f local.yml run --rm django python3 manage.py makemigrations
     $ docker-compose -f local.yml run --rm django python3 manage.py migrate
 
+* Populate models. Can take ~5 minutes::
+
+    $ docker-compose -f local.yml run --rm django python3 manage.py cities_light
+
 * Run images::
 
     $ docker-compose -f local.yml up

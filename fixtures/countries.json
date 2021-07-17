@@ -1,0 +1,18 @@
+[
+{
+    "model": "cities_light.country",
+    "pk": 1,
+    "fields": {
+        "name": "Russia",
+        "name_ascii": "Russia",
+        "slug": "russia",
+        "geoname_id": 2017370,
+        "alternate_names": "Russian Federation;Российская Федерация",
+        "code2": "RU",
+        "code3": "RUS",
+        "continent": "EU",
+        "tld": "ru",
+        "phone": "7"
+    }
+}
+]

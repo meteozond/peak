@@ -1,0 +1,212 @@
+[
+{
+    "model": "cities_light.city",
+    "pk": 1,
+    "fields": {
+        "name": "Udomlya",
+        "name_ascii": "Udomlya",
+        "slug": "udomlya",
+        "geoname_id": 452949,
+        "alternate_names": "Удомля",
+        "display_name": "Udomlya, Tver’ Oblast, Russia",
+        "search_names": "udomliarossiiskaiafederatsiia udomliarussia udomliarussianfederation udomliatveroblastrossiiskaiafederatsiia udomliatveroblastrussia udomliatveroblastrussianfederation udomliatverskaiaoblastrossiiskaiafederatsiia udomliatverskaiaoblastrussia udomliatverskaiaoblastrussianfederation udomlyarossiiskaiafederatsiia udomlyarussia udomlyarussianfederation udomlyatveroblastrossiiskaiafederatsiia udomlyatveroblastrussia udomlyatveroblastrussianfederation udomlyatverskaiaoblastrossiiskaiafederatsiia udomlyatverskaiaoblastrussia udomlyatverskaiaoblastrussianfederation",
+        "latitude": "57.87944",
+        "longitude": "34.99250",
+        "subregion": null,
+        "region": 7,
+        "country": 1,
+        "population": 32373,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 2,
+    "fields": {
+        "name": "Sasovo",
+        "name_ascii": "Sasovo",
+        "slug": "sasovo",
+        "geoname_id": 461699,
+        "alternate_names": "Сасово",
+        "display_name": "Sasovo, Ryazan Oblast, Russia",
+        "search_names": "sasovoriazanskaiaoblastrossiiskaiafederatsiia sasovoriazanskaiaoblastrussia sasovoriazanskaiaoblastrussianfederation sasovorossiiskaiafederatsiia sasovorussia sasovorussianfederation sasovoryazanoblastrossiiskaiafederatsiia sasovoryazanoblastrussia sasovoryazanoblastrussianfederation",
+        "latitude": "54.35369",
+        "longitude": "41.91986",
+        "subregion": null,
+        "region": 15,
+        "country": 1,
+        "population": 29858,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 3,
+    "fields": {
+        "name": "Novozavidovskiy",
+        "name_ascii": "Novozavidovskiy",
+        "slug": "novozavidovskiy",
+        "geoname_id": 461704,
+        "alternate_names": "Новозавидовский",
+        "display_name": "Novozavidovskiy, Tver’ Oblast, Russia",
+        "search_names": "novozavidovskiirossiiskaiafederatsiia novozavidovskiirussia novozavidovskiirussianfederation novozavidovskiitveroblastrossiiskaiafederatsiia novozavidovskiitveroblastrussia novozavidovskiitveroblastrussianfederation novozavidovskiitverskaiaoblastrossiiskaiafederatsiia novozavidovskiitverskaiaoblastrussia novozavidovskiitverskaiaoblastrussianfederation novozavidovskiyrossiiskaiafederatsiia novozavidovskiyrussia novozavidovskiyrussianfederation novozavidovskiytveroblastrossiiskaiafederatsiia novozavidovskiytveroblastrussia novozavidovskiytveroblastrussianfederation novozavidovskiytverskaiaoblastrossiiskaiafederatsiia novozavidovskiytverskaiaoblastrussia novozavidovskiytverskaiaoblastrussianfederation",
+        "latitude": "56.55000",
+        "longitude": "36.43333",
+        "subregion": null,
+        "region": 7,
+        "country": 1,
+        "population": 7641,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 4,
+    "fields": {
+        "name": "Krasnolesnyy",
+        "name_ascii": "Krasnolesnyy",
+        "slug": "krasnolesnyy",
+        "geoname_id": 461705,
+        "alternate_names": "Краснолесный",
+        "display_name": "Krasnolesnyy, Voronezj, Russia",
+        "search_names": "krasnolesnyirossiiskaiafederatsiia krasnolesnyirussia krasnolesnyirussianfederation krasnolesnyivoronezhskaiaoblastrossiiskaiafederatsiia krasnolesnyivoronezhskaiaoblastrussia krasnolesnyivoronezhskaiaoblastrussianfederation krasnolesnyivoronezjrossiiskaiafederatsiia krasnolesnyivoronezjrussia krasnolesnyivoronezjrussianfederation krasnolesnyyrossiiskaiafederatsiia krasnolesnyyrussia krasnolesnyyrussianfederation krasnolesnyyvoronezhskaiaoblastrossiiskaiafederatsiia krasnolesnyyvoronezhskaiaoblastrussia krasnolesnyyvoronezhskaiaoblastrussianfederation krasnolesnyyvoronezjrossiiskaiafederatsiia krasnolesnyyvoronezjrussia krasnolesnyyvoronezjrussianfederation",
+        "latitude": "51.88290",
+        "longitude": "39.57710",
+        "subregion": null,
+        "region": 2,
+        "country": 1,
+        "population": 5305,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 5,
+    "fields": {
+        "name": "Kosterevo",
+        "name_ascii": "Kosterevo",
+        "slug": "kosterevo",
+        "geoname_id": 461720,
+        "alternate_names": "Костерево",
+        "display_name": "Kosterevo, Vladimir, Russia",
+        "search_names": "kosterevorossiiskaiafederatsiia kosterevorussia kosterevorussianfederation kosterevovladimirrossiiskaiafederatsiia kosterevovladimirrussia kosterevovladimirrussianfederation kosterevovladimirskaiaoblastrossiiskaiafederatsiia kosterevovladimirskaiaoblastrussia kosterevovladimirskaiaoblastrussianfederation",
+        "latitude": "55.92990",
+        "longitude": "39.61438",
+        "subregion": null,
+        "region": 56,
+        "country": 1,
+        "population": 9349,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 6,
+    "fields": {
+        "name": "Zyukayka",
+        "name_ascii": "Zyukayka",
+        "slug": "zyukayka",
+        "geoname_id": 461756,
+        "alternate_names": "Зюкайка",
+        "display_name": "Zyukayka, Perm, Russia",
+        "search_names": "ziukaikapermrossiiskaiafederatsiia ziukaikapermrussia ziukaikapermrussianfederation ziukaikapermskiikrairossiiskaiafederatsiia ziukaikapermskiikrairussia ziukaikapermskiikrairussianfederation ziukaikarossiiskaiafederatsiia ziukaikarussia ziukaikarussianfederation zyukaykapermrossiiskaiafederatsiia zyukaykapermrussia zyukaykapermrussianfederation zyukaykapermskiikrairossiiskaiafederatsiia zyukaykapermskiikrairussia zyukaykapermskiikrairussianfederation zyukaykarossiiskaiafederatsiia zyukaykarussia zyukaykarussianfederation",
+        "latitude": "58.20416",
+        "longitude": "54.70784",
+        "subregion": null,
+        "region": 18,
+        "country": 1,
+        "population": 4556,
+        "feature_code": "PPL",
+        "timezone": "Asia/Yekaterinburg"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 7,
+    "fields": {
+        "name": "Zykovo",
+        "name_ascii": "Zykovo",
+        "slug": "zykovo",
+        "geoname_id": 461781,
+        "alternate_names": "Зыково",
+        "display_name": "Zykovo, Mordoviya Republic, Russia",
+        "search_names": "zykovomordoviyarepublicrossiiskaiafederatsiia zykovomordoviyarepublicrussia zykovomordoviyarepublicrussianfederation zykovomordovskaiarespublikarossiiskaiafederatsiia zykovomordovskaiarespublikarussia zykovomordovskaiarespublikarussianfederation zykovorespublikamordoviiarossiiskaiafederatsiia zykovorespublikamordoviiarussia zykovorespublikamordoviiarussianfederation zykovorossiiskaiafederatsiia zykovorussia zykovorussianfederation",
+        "latitude": "54.06853",
+        "longitude": "45.08633",
+        "subregion": null,
+        "region": 28,
+        "country": 1,
+        "population": 1059,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 8,
+    "fields": {
+        "name": "Zvony",
+        "name_ascii": "Zvony",
+        "slug": "zvony",
+        "geoname_id": 461863,
+        "alternate_names": "Звоны",
+        "display_name": "Zvony, Pskov Oblast, Russia",
+        "search_names": "zvonypskovoblastrossiiskaiafederatsiia zvonypskovoblastrussia zvonypskovoblastrussianfederation zvonypskovskaiaoblastrossiiskaiafederatsiia zvonypskovskaiaoblastrussia zvonypskovskaiaoblastrussianfederation zvonyrossiiskaiafederatsiia zvonyrussia zvonyrussianfederation",
+        "latitude": "56.62409",
+        "longitude": "28.81604",
+        "subregion": null,
+        "region": 17,
+        "country": 1,
+        "population": 0,
+        "feature_code": "PPLA3",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 9,
+    "fields": {
+        "name": "Zverevo",
+        "name_ascii": "Zverevo",
+        "slug": "zverevo",
+        "geoname_id": 461910,
+        "alternate_names": "Зверево",
+        "display_name": "Zverevo, Rostov, Russia",
+        "search_names": "zverevorossiiskaiafederatsiia zverevorostovoblastrossiiskaiafederatsiia zverevorostovoblastrussia zverevorostovoblastrussianfederation zverevorostovrossiiskaiafederatsiia zverevorostovrussia zverevorostovrussianfederation zverevorostovskaiaoblastrossiiskaiafederatsiia zverevorostovskaiaoblastrussia zverevorostovskaiaoblastrussianfederation zverevorostovskayaoblastrossiiskaiafederatsiia zverevorostovskayaoblastrussia zverevorostovskayaoblastrussianfederation zverevorussia zverevorussianfederation",
+        "latitude": "48.02108",
+        "longitude": "40.12282",
+        "subregion": null,
+        "region": 16,
+        "country": 1,
+        "population": 24978,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "cities_light.city",
+    "pk": 10,
+    "fields": {
+        "name": "Zvenigovo",
+        "name_ascii": "Zvenigovo",
+        "slug": "zvenigovo",
+        "geoname_id": 461916,
+        "alternate_names": "Звенигово",
+        "display_name": "Zvenigovo, Mariy-El Republic, Russia",
+        "search_names": "zvenigovomariielrossiiskaiafederatsiia zvenigovomariielrussia zvenigovomariielrussianfederation zvenigovomariyelrepublicrossiiskaiafederatsiia zvenigovomariyelrepublicrussia zvenigovomariyelrepublicrussianfederation zvenigovorespublikamariielrossiiskaiafederatsiia zvenigovorespublikamariielrussia zvenigovorespublikamariielrussianfederation zvenigovorossiiskaiafederatsiia zvenigovorussia zvenigovorussianfederation",
+        "latitude": "55.97539",
+        "longitude": "48.01304",
+        "subregion": null,
+        "region": 29,
+        "country": 1,
+        "population": 12484,
+        "feature_code": "PPL",
+        "timezone": "Europe/Moscow"
+    }
+}
+]

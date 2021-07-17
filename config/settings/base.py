@@ -55,10 +55,12 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
+    'cities_light',
 ]
 
 LOCAL_APPS = [
     "peak.users.apps.UsersConfig",
+    "peak.addresses.apps.AddressesConfig",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -186,7 +188,7 @@ LOGGING = {
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+                      "%(process)d %(thread)d %(message)s"
         }
     },
     "handlers": {
@@ -198,7 +200,6 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
 
 # django-allauth
 # ------------------------------------------------------------------------------
@@ -219,3 +220,11 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 CORS_URLS_REGEX = r"^/api/.*$"
+
+# django-cities-light
+# -------------------------------------------------------------------------------
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['ru', 'en']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['RU']
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLC', 'PPLF', 'PPLG',
+                                   'PPLL', 'PPLR', 'PPLS', 'STLMT', ]
+CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities500.zip', ]
