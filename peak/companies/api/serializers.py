@@ -10,7 +10,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ['name', 'email', 'phone', 'address']
+        fields = ['id', 'name', 'email', 'phone', 'address']
 
     def create(self, validated_data):
         return Company.s_objects.create(**validated_data)

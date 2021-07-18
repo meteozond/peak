@@ -21,7 +21,6 @@ class CompanySerializerManager(QuerySet):
         address = kwargs.pop('address')
         city = City.objects.get(name=address.pop('city'))
         Address.objects.filter(company=instance).update(city=city, **address)
-        super(CompanySerializerManager, self).update(**kwargs)
+        self.model.objects.filter(id=instance.id).update(**kwargs)
         instance.refresh_from_db()
         return instance
-
