@@ -41,9 +41,10 @@ class Company(models.Model):
     class Meta:
         verbose_name = _('Служба эксплуатации')
         verbose_name_plural = _('Службы эксплуатации')
+        ordering = ['name']
 
     def get_absolute_url(self):
-        return reverse('companies:detail', kwargs={'id': self.pk})
+        return reverse('api:companies-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'{self.name}'
