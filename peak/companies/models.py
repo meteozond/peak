@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from peak.addresses.models import Address
 
-from .managers import CompanyManager
+from .managers import CompanyManager, CompanySerializerManager
 
 
 class Company(models.Model):
@@ -36,6 +36,7 @@ class Company(models.Model):
         on_delete=models.PROTECT,
     )
     objects = CompanyManager.as_manager()
+    s_objects = CompanySerializerManager.as_manager()
 
     class Meta:
         verbose_name = _('Служба эксплуатации')

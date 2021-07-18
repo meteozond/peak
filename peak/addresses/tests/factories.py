@@ -1,8 +1,8 @@
 from random import randrange
 
+from cities_light.models import City
 from factory import Faker, LazyAttribute
 from factory.django import DjangoModelFactory
-from cities_light.models import City
 
 from ..models import Address
 
