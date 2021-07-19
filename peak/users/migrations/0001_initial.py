@@ -119,4 +119,5 @@ class Migration(migrations.Migration):
             managers=[("objects", django.contrib.auth.models.UserManager())],
         ),
         postgres_operations.CITextExtension(),
+        postgres_operations.CreateExtension('postgis'),
     ]

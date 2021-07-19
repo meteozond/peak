@@ -40,13 +40,15 @@ WORKDIR ${APP_HOME}
 RUN addgroup --system django \
     && adduser --system --ingroup django django
 
-
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # psycopg2 dependencies
   libpq-dev \
   # Translations dependencies
   gettext \
+  # Geospatial libraries
+  binutils libproj-dev gdal-bin \
+  libgeos-dev \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
@@ -59,6 +61,9 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
   && rm -rf /wheels/
 
+# Geospatial libraries
+RUN apt-get install binutils libproj-dev gdal-bin
+RUN apt-get install -y libgeos-dev
 
 COPY --chown=django:django ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
