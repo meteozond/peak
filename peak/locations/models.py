@@ -2,6 +2,8 @@ from django.contrib.gis.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from peak.companies.models import Company
+
 from .managers import LocationManager, ServiceManager
 
 
@@ -14,12 +16,6 @@ class Service(models.Model):
         help_text=_('Название услуги'),
         max_length=200,
         unique=True,
-    )
-    price = models.DecimalField(
-        verbose_name=_('Локация'),
-        help_text=_('Локация'),
-        max_digits=11,
-        decimal_places=2,
     )
     objects = ServiceManager.as_manager()
 
@@ -46,11 +42,13 @@ class Location(models.Model):
         spatial_index=True,
         # geography=True,
     )
-    services = models.ManyToManyField(
-        Service,
-        verbose_name=_('Оказываемые услуги'),
-        help_text=_('Оказываемые услуги'),
+    company = models.ForeignKey(
+        Company,
+        verbose_name=_('Служба эксплуатации'),
+        help_text=_('Служба эксплуатации'),
+        on_delete=models.CASCADE,
     )
+
     objects = LocationManager.as_manager()
 
     class Meta:
@@ -62,3 +60,34 @@ class Location(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class LocServices(models.Model):
+    """
+    Цена за услугу в области обслуживания.
+    """
+    location = models.ForeignKey(
+        Location,
+        verbose_name=_('Локация'),
+        help_text=_('Локация'),
+        on_delete=models.CASCADE,
+    )
+    service = models.ForeignKey(
+        Service,
+        verbose_name=_('Услуга'),
+        help_text=_('Услуга'),
+        on_delete=models.PROTECT,
+    )
+    price = models.DecimalField(
+        verbose_name=_('Цена за услугу'),
+        help_text=_('Цена за услугу'),
+        max_digits=11,
+        decimal_places=2,
+    )
+
+    class Meta:
+        verbose_name = _('Область обслуживания')
+        verbose_name_plural = _('Области обслуживания')
+
+    def __str__(self):
+        return f'{self.location.name}: {self.service.name} {self.price}'
