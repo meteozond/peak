@@ -28,6 +28,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 # ------------------------------------------------------------------------------
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 # URLS
 # ------------------------------------------------------------------------------
@@ -46,6 +47,7 @@ DJANGO_APPS = [
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
     "django.forms",
+    "django.contrib.gis",
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -63,6 +65,7 @@ LOCAL_APPS = [
     "peak.users.apps.UsersConfig",
     "peak.addresses.apps.AddressesConfig",
     "peak.companies.apps.CompaniesConfig",
+    "peak.locations.apps.LocationsConfig",
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
