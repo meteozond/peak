@@ -22,6 +22,7 @@ class Service(models.Model):
     class Meta:
         verbose_name = _('Услуга')
         verbose_name_plural = _('Услуги')
+        ordering=['name']
 
     def __str__(self):
         return f'{self.name}'
@@ -55,6 +56,7 @@ class Location(models.Model):
         verbose_name = _('Область обслуживания')
         verbose_name_plural = _('Области обслуживания')
         unique_together = ['name', 'company']
+        ordering = ['-id']
 
     def get_absolute_url(self):
         return reverse('api:locations-detail', kwargs={'pk': self.pk})
@@ -63,7 +65,7 @@ class Location(models.Model):
         return f'{self.name}'
 
 
-class LocService (models.Model):
+class LocService(models.Model):
     """
     Цена за услугу в области обслуживания.
     """
@@ -91,6 +93,7 @@ class LocService (models.Model):
     class Meta:
         verbose_name = _('Область обслуживания')
         verbose_name_plural = _('Области обслуживания')
+        unique_together = ['location', 'service']
 
     def __str__(self):
         return f'{self.location.name}: {self.service.name} {self.price}'
