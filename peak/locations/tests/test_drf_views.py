@@ -13,17 +13,21 @@ from peak.locations.tests.factories import (LocWithServiceFactory,
 faker = Faker()
 
 
-class TestCompaniesView(AddressTestMixin, APIAuthTestMixin, TestCase):
+class TestLocationsAPIView(AddressTestMixin, APIAuthTestMixin, TestCase):
 
     def setUp(self):
         self.objects_count = 5
         LocWithServiceFactory.create_batch(self.objects_count)
 
-        self.payload = LocationSerializer(Location.objects.first())
-        self.payload.data['id'] = 0
-        self.payload.data['properties']['name'] = faker.address()
-
-        super(TestCompaniesView, self).setUp()
+        # TODO: придумать более легкий способ генерировать Payload
+        payload = LocationSerializer(Location.objects.first())
+        payload.data['id'] = 0
+        payload.data['properties']['name'] = faker.address()
+        service = ServiceFactory.create()
+        service = {'service': service.id, 'service_name': service.name, 'price': 0.13}
+        payload.data['properties']['services'].append(service)
+        self.payload = payload
+        super(TestLocationsAPIView, self).setUp()
 
     def test_list(self):
         url = reverse('api:locations-list')
@@ -42,13 +46,14 @@ class TestCompaniesView(AddressTestMixin, APIAuthTestMixin, TestCase):
 
     def test_create(self):
         url = reverse('api:locations-list')
-
         response = self.client.post(url, data=self.payload.data, format='json')
         message = 'Invalid response status code'
         self.assertEqual(201, response.status_code, message)
 
         message = 'Обьект не создан'
-        self.assertEqual(self.objects_count + 1, LocService.objects.count(), message)
+        self.assertEqual(self.objects_count + 1, Location.objects.count(), message)
+        message = 'Дополнительные услуги не создались'
+        self.assertEqual(self.objects_count + 2, LocService.objects.count(), message)
 
     def test_delete(self):
         obj = Location.objects.select_related().first()
@@ -101,3 +106,5 @@ class TestCompaniesView(AddressTestMixin, APIAuthTestMixin, TestCase):
         new_service_count = LocService.objects.filter(location=obj.id).count()
         message = 'Дополнительная услуга не создалась'
         self.assertNotEqual(old_service_count, new_service_count, message)
+
+# TODO: доделать тесты
