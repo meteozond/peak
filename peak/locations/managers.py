@@ -7,3 +7,7 @@ class LocationManager(QuerySet):
 
 class ServiceManager(QuerySet):
     pass
+
+
+class LocServiceManager(QuerySet):
+    pass

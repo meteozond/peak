@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from peak.companies.models import Company
 
-from .managers import LocationManager, ServiceManager
+from .managers import LocationManager, LocServiceManager, ServiceManager
 
 
 class Service(models.Model):
@@ -37,8 +37,8 @@ class Location(models.Model):
         max_length=200,
     )
     location = models.PolygonField(
-        verbose_name=_('Локация'),
-        help_text=_('Локация'),
+        verbose_name=_('Полигон'),
+        help_text=_('Полигон'),
         spatial_index=True,
         # geography=True,
     )
@@ -54,6 +54,7 @@ class Location(models.Model):
     class Meta:
         verbose_name = _('Область обслуживания')
         verbose_name_plural = _('Области обслуживания')
+        unique_together = ['name', 'company']
 
     def get_absolute_url(self):
         return reverse('api:locations-detail', kwargs={'pk': self.pk})
@@ -62,7 +63,7 @@ class Location(models.Model):
         return f'{self.name}'
 
 
-class LocServices(models.Model):
+class LocService (models.Model):
     """
     Цена за услугу в области обслуживания.
     """
@@ -84,6 +85,8 @@ class LocServices(models.Model):
         max_digits=11,
         decimal_places=2,
     )
+
+    objects = LocServiceManager.as_manager()
 
     class Meta:
         verbose_name = _('Область обслуживания')

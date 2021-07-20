@@ -1,9 +1,9 @@
-from factory import Faker, LazyAttribute, RelatedFactory, SubFactory
+from factory import Faker, LazyAttribute, SubFactory
 from factory.django import DjangoModelFactory
 
 from peak.companies.tests.factories import CompanyFactory
 from peak.core.utils import generate_polygon
-from peak.locations.models import Location, LocServices, Service
+from peak.locations.models import Location, LocService, Service
 
 
 class ServiceFactory(DjangoModelFactory):
@@ -28,4 +28,4 @@ class LocWithServiceFactory(DjangoModelFactory):
     price = Faker('pydecimal', positive=True, left_digits=6, right_digits=2)
 
     class Meta:
-        model = LocServices
+        model = LocService
