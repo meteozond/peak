@@ -5,24 +5,29 @@ from django.contrib.gis.geos.error import GEOSException
 from django.utils.translation import gettext_lazy as _
 
 
-def validate_poly(value):
+class ValidateGeo:
     """
-    Проверяет, что гео поле можно преобразовать в полигон.
+    Проверяет, что гео поле можно преобразовать в заданный тип геопозиции.
     """
-    try:
-        poly = GEOSGeometry(value)
-    except (GEOSException, ValueError):
-        raise serializers.ValidationError({
-            'location': _('Значение не распознано, допустимые форматы: WKT, EWKT, HEXEWKB.')
-        })
 
-    if not poly.valid and poly.geom_typeid != 3:
-        raise serializers.ValidationError({
-            'location': _('Значение не является полигоном.')
-        })
-    srids = [4326, ]
-    if poly.srid not in srids:
-        raise serializers.ValidationError({
-            'location': _(f'Недопустимый SRID, возможные значения: {srids}')
-        })
-    return value
+    def __init__(self, geom_typeid):
+        self.geom_typeid = geom_typeid
+
+    def __call__(self, value):
+        try:
+            poly = GEOSGeometry(value)
+        except (GEOSException, ValueError):
+            raise serializers.ValidationError({
+                'location': _('Значение не распознано, допустимые форматы: WKT, EWKT, HEXEWKB.')
+            })
+
+        if not poly.valid and poly.geom_typeid != self.geom_typeid:
+            raise serializers.ValidationError({
+                'location': _('Неверный тип геопозиции.')
+            })
+        srids = [4326, ]
+        if poly.srid not in srids:
+            raise serializers.ValidationError({
+                'location': _(f'Недопустимый SRID, возможные значения: {srids}')
+            })
+        return value

@@ -4,7 +4,7 @@ from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from django.utils.translation import gettext_lazy as _
 
 from ..models import Location, LocService, Service
-from .validators import validate_poly
+from .validators import ValidateGeo
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class LocationSerializer(GeoFeatureModelSerializer):
     location = serializers.CharField(
         help_text=_('Полигон'),
         label=_('Область обслуживания'),
-        validators=[validate_poly, ],
+        validators=[ValidateGeo(3), ],
         max_length=200,
     )
 
