@@ -26,7 +26,7 @@ class CompaniesViewSet(mixins.RetrieveModelMixin,
     """
     Управление службами эксплуатации
     """
-    http_method_names = ['get', 'post', 'put']
+    http_method_names = ['get', 'post', 'put', 'delete']
     permission_classes = [IsAuthenticated]
     serializer_class = CompanySerializer
     queryset = Company.objects.prefetch_related('address', 'address__city')

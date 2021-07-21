@@ -1,4 +1,5 @@
-from drf_spectacular.utils import extend_schema, extend_schema_view
+from drf_spectacular.utils import (OpenApiExample, OpenApiParameter,
+                                   extend_schema, extend_schema_view)
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -27,12 +28,28 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
     """
     Управления областями обслуживания.
     """
-    http_method_names = ['get', 'post', 'put']
+    http_method_names = ['get', 'post', 'put', 'delete']
     permission_classes = [IsAuthenticated]
     serializer_class = LocationSerializer
     queryset = Location.objects.all().prefetch_related('company', 'locservice_set__service')
     pagination_class = LocationsGEOPagination
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name='service',
+                description=_('Выборка по услуге'),
+                required=False, type=str,
+                examples=[OpenApiExample(_('Пример'), value='Перекладка плитки'), ],
+            ),
+            OpenApiParameter(
+                name='point',
+                type=str,
+                description=_('Выборка по локации'),
+                examples=[OpenApiExample(_('Пример'), value='SRID=4326;POINT (66 66)'), ],
+            ),
+        ],
+    )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = GeofilterSerializer(data={
