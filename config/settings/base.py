@@ -59,6 +59,8 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "cities_light",
     "phonenumber_field",
+    "drf_spectacular",
+    "django_filters",
 ]
 
 LOCAL_APPS = [
@@ -222,7 +224,14 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/day',
+        'user': '10000/day'
+    },
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 CORS_URLS_REGEX = r"^/api/.*$"
 
@@ -237,3 +246,16 @@ CITIES_LIGHT_CITY_SOURCES = ['http://download.geonames.org/export/dump/cities500
 # phonenumber_field
 # -------------------------------------------------------------------------------
 PHONENUMBER_DB_FORMAT = 'INTERNATIONAL'
+
+# drf-spectacular
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Peak API',
+    'DESCRIPTION': 'Create your own amazing locations for free!',
+    'VERSION': '0.0.1',
+    'SCHEMA_PATH_PREFIX': r'/api/',
+    'SWAGGER_UI_SETTINGS': {
+        'defaultModelsExpandDepth': -1,
+        'withCredentials': False,
+        'urls.primaryName': 'SECOND',
+    },
+}

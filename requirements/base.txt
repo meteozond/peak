@@ -21,4 +21,5 @@ django-phonenumber-field==5.2.0 # https://github.com/stefanfoulis/django-phonenu
 djangorestframework==3.12.4  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.7.0 # https://github.com/adamchainz/django-cors-headers
 djangorestframework-gis==0.17 # https://github.com/openwisp/django-rest-framework-gis
-
+drf-spectacular==0.17.2 # https://github.com/tfranzel/drf-spectacular/
+django-filter== 2.4.0 # https://github.com/carltongibson/django-filter
