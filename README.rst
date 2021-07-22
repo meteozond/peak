@@ -16,15 +16,6 @@ Setting Up Your Users
 
     $ docker-compose -f local.yml run --rm django python manage.py createsuperuser
 
-Test coverage
-^^^^^^^^^^^^^
-
-To run the tests, check your test coverage, and generate an HTML coverage report::
-
-    $ docker-compose -f local.yml run --rm django coverage run -m pytest
-    $ docker-compose -f local.yml run --rm django coverage html
-    $ open htmlcov/index.html
-
 Running tests with py.test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 ::
@@ -35,11 +26,11 @@ Deployment
 ----------
 The following details how to deploy this application.
 
-* Rename ".envs_templates" and change envs values to your own::
+* Rename ".envs templates" and change envs values to your own::
 
-    $ mv .envs_templates/ .envs
+    $ mv .envs\ templates/ .envs
 
-* Build images::
+* Build images:::
 
     $ docker-compose -f local.yml build
 
@@ -51,9 +42,20 @@ The following details how to deploy this application.
 * Populate models. Can take ~5 minutes::
 
     $ docker-compose -f local.yml run --rm django python3 manage.py cities_light
+    $ docker-compose -f local.yml run --rm django python3 manage.py loaddata fixtures/demonstrate.json
 
 * Run images::
 
     $ docker-compose -f local.yml up
 
-* Check http://0.0.0.0:8000/
+* log in http://0.0.0.0:8000/admin/: login: peak, password: peak_admin
+* Check http://0.0.0.0:8000/api/
+* Check http://0.0.0.0:8000/api/schema/swagger-ui/
+
+
+Resolving issues:
+^^^^^^^^^^^^^^^^^
+::
+
+    $ rm -rf peak/locations/api
+
