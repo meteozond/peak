@@ -20,7 +20,7 @@ class ValidateGeo:
             raise serializers.ValidationError({
                 'location': _('Значение не распознано, допустимые форматы: WKT, EWKT, HEXEWKB.')
             })
-        if not poly.valid or poly.geom_typeid != self.geom_typeid:
+        if poly.geom_typeid != self.geom_typeid:
             raise serializers.ValidationError({
                 'location': _(f'Неверный тип геопозиции. Допустимый тип: {self.geom_typeid}')
             })

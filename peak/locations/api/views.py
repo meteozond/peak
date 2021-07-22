@@ -9,7 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 from ..models import Location
 from .paginators import LocationsGEOPagination
-from .serializers import GeofilterSerializer, LocationSerializer
+from .serializers import (GeofilterSerializer, LocationListSerializer,
+                          LocationSerializer)
 
 
 @extend_schema_view(
@@ -29,7 +30,7 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
     Управления областями обслуживания.
     """
     http_method_names = ['get', 'post', 'put', 'delete']
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, ]
     serializer_class = LocationSerializer
     queryset = Location.objects.all().prefetch_related('company', 'locservice_set__service')
     pagination_class = LocationsGEOPagination
@@ -51,7 +52,9 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
         ],
     )
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
+
+        # проверка параметров запроса и фильтрация
         serializer = GeofilterSerializer(data={
             'service': request.GET.get('service', ''),
             'point': request.GET.get('point', ''),
@@ -66,9 +69,12 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
             queryset = queryset.filter(
                 location__contains=serializer.data['point']
             )
+
+        # пагинация
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer = self.get_serializer(page, many=True)
+            serializer = LocationListSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
+
+        serializer = LocationListSerializer(queryset, many=True)
         return Response(serializer.data)

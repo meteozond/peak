@@ -36,95 +36,67 @@ class GeofilterSerializer(serializers.Serializer):
         pass
 
 
-class CompanyNameSerializer(serializers.ModelSerializer):
-    # по необьяснимой причине без обьявления поля ID в POST запросе его не будет,
-    # не смотря на то, что READONLY атрибута нигде нет и в GET запросах ID есть.
-    id = serializers.IntegerField(
-        help_text=_('ID компании'),
-        label=_('ID компании'),
-    )
-
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['id', 'name']
-        read_only_fields = ['name']
-
-    def validate_id(self, value):
-        if not Company.objects.filter(id=value).exists():
-            raise serializers.ValidationError(
-                {'id': _('Такой компании не существует.')}
-            )
-        return value
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-
         fields = ['id', 'name']
 
 
-class LocServicesSerializer(serializers.ModelSerializer):
+class LocServiceListSerializer(serializers.ModelSerializer):
     service_name = serializers.ReadOnlyField(source='service.name')
 
     class Meta:
         model = LocService
-        fields = ['service', 'price', 'service_name']
+        fields = ['service', 'service_name', 'price']
 
 
 class LocationSerializer(GeoFeatureModelSerializer):
-    services = LocServicesSerializer(source='locservice_set', many=True)
-    company = CompanyNameSerializer()
-    location = serializers.CharField(
-        help_text=_('Полигон'),
-        label=_('Область обслуживания'),
-        validators=[ValidateGeo(3)],
-        max_length=200,
-    )
+    services = LocServiceListSerializer(source='locservice_set', many=True)
 
     class Meta:
         model = Location
         fields = ['id', 'name', 'location', 'company', 'services']
         geo_field = 'location'
 
-    def validate(self, attrs):
-        attrs = super(LocationSerializer, self).validate(attrs)
-
-        # У локации компании не можеть быть несколько одинаковых услуг.
-        services = [a['service'].id for a in attrs['locservice_set']]
-        if not len(services) == len(set(services)):
-            raise serializers.ValidationError({
-                'services': _('В области не может быть одинаковых услуг.')
-            })
-        company_location_exists = (Company.objects
-                                   .filter(id=attrs['company']['id'])
-                                   .filter(location__name=attrs['name'])
-                                   .exists()
-                                   )
-        # Check Unique Together
-        if company_location_exists:
-            raise serializers.ValidationError({
-                'name': _('У данной компании уже есть область с таким именем.')
-            })
-
-        return attrs
+    @staticmethod
+    def validate_location(value):
+        ValidateGeo(3)(value)
+        return value
 
     def create(self, validated_data):
         services = validated_data.pop('locservice_set')
-        company = Company.objects.get(id=validated_data.pop('company')['id'])
-        location = Location.objects.create(company=company, **validated_data)
+        location = Location.objects.create(company=validated_data.pop('company'), **validated_data)
         services = [LocService(location=location, **service) for service in services]
         LocService.objects.bulk_create(services)
         return location
 
     def update(self, instance, validated_data):
-        services = validated_data.pop('locservice_set')
+        instance.company = validated_data.pop('company')
+        instance.name = validated_data['name']
+        services = validated_data['locservice_set']
+        services_to_set = []
         for s in services:
-            LocService.objects.update_or_create(
+            service, _ = LocService.objects.update_or_create(
                 location=instance, service=s['service'], defaults={'price': s['price']}
             )
-
-        instance.name = validated_data['name']
-        instance.location = validated_data['location']
+            services_to_set.append(service)
+        instance.locservice_set.set(services_to_set)
+        instance.locservice_set.exclude(id__in=[s.id for s in services_to_set]).delete()
         instance.save()
         return instance
+
+
+class LocationListSerializer(GeoFeatureModelSerializer):
+    company = CompanySerializer()
+    services = LocServiceListSerializer(source='locservice_set', many=True)
+
+    class Meta:
+        model = Location
+        fields = ['id', 'name', 'company', 'services']
+        geo_field = 'location'

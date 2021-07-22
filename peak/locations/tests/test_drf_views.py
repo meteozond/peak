@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from peak.core.tests.mixins import AddressTestMixin, APIAuthTestMixin
 from peak.locations.api.serializers import LocationSerializer
-from peak.locations.models import Location, LocService
+from peak.locations.models import Company, Location, LocService, Service
 from peak.locations.tests.factories import (LocWithServiceFactory,
                                             ServiceFactory)
 
@@ -18,15 +18,20 @@ class TestLocationsAPIView(AddressTestMixin, APIAuthTestMixin, TestCase):
     def setUp(self):
         self.objects_count = 5
         LocWithServiceFactory.create_batch(self.objects_count)
-
-        # TODO: придумать более легкий способ генерировать Payload
-        payload = LocationSerializer(Location.objects.first())
-        payload.data['id'] = 0
-        payload.data['properties']['name'] = faker.address()
-        service = ServiceFactory.create()
-        service = {'service': service.id, 'service_name': service.name, 'price': 0.13}
-        payload.data['properties']['services'].append(service)
-        self.payload = payload
+        self.payload = {
+            "type": "Feature",
+            "geometry": Location.objects.first().location.ewkt,
+            "properties": {
+                "name": faker.street_address(),
+                "company": Company.objects.first().id,
+                "services": [
+                    {
+                        "service": Service.objects.first().id,
+                        "price": "{}".format(faker.pyfloat(left_digits=4, right_digits=2))
+                    }
+                ]
+            }
+        }
         super(TestLocationsAPIView, self).setUp()
 
     def test_list(self):
@@ -46,14 +51,11 @@ class TestLocationsAPIView(AddressTestMixin, APIAuthTestMixin, TestCase):
 
     def test_create(self):
         url = reverse('api:locations-list')
-        response = self.client.post(url, data=self.payload.data, format='json')
+        response = self.client.post(url, data=self.payload, format='json')
         message = 'Invalid response status code'
         self.assertEqual(201, response.status_code, message)
-
         message = 'Обьект не создан'
         self.assertEqual(self.objects_count + 1, Location.objects.count(), message)
-        message = 'Дополнительные услуги не создались'
-        self.assertEqual(self.objects_count + 2, LocService.objects.count(), message)
 
     def test_delete(self):
         obj = Location.objects.select_related().first()
@@ -87,14 +89,15 @@ class TestLocationsAPIView(AddressTestMixin, APIAuthTestMixin, TestCase):
         old_service_count = obj.services_count
 
         payload = self.payload
-        payload.data['id'] = obj.id
-        new_service_obj = ServiceFactory()
-        new_service = payload.data['properties']['services'][0].copy()
+        payload['company'] = obj.company.id
+
+        new_service_obj = ServiceFactory.create()
+        new_service = payload['properties']['services'][0].copy()
         new_service['service'] = new_service_obj.id
-        payload.data['properties']['services'].append(new_service)
+        payload['properties']['services'].append(new_service)
 
         url = reverse('api:locations-detail', kwargs={'pk': obj.pk})
-        response = self.client.put(url, data=payload.data, format='json')
+        response = self.client.put(url, data=payload, format='json')
         obj.refresh_from_db()
 
         message = 'Invalid response status code'
