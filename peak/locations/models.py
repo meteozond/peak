@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.contrib.postgres.fields import CICharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -11,7 +12,7 @@ class Service(models.Model):
     """
     Оказываемые услуги.
     """
-    name = models.CharField(
+    name = CICharField(
         verbose_name=_('Название услуги'),
         help_text=_('Название услуги'),
         max_length=200,
