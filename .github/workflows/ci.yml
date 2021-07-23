@@ -16,23 +16,6 @@ on:
 
 
 jobs:
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout Code Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      # Run all pre-commit hooks on all the files.
-      # Getting only staged files can be tricky in case a new PR is opened
-      # since the action is run on a branch in detached head state
-      - name: Install and Run Pre-commit 
-        uses: pre-commit/action@v2.0.0
 
   # With no caching at all the entire ci process takes 4m 30s to complete!
   pytest:
@@ -48,6 +31,12 @@ jobs:
 
       - name: Run DB Migrations
         run:  docker-compose -f local.yml run --rm django python manage.py migrate
+
+      - name: Populate database with cities
+        run:  docker-compose -f local.yml run --rm django python3 manage.py cities_light
+
+      - name: Populate database with locations
+        run:  docker-compose -f local.yml run --rm django python3 manage.py loaddata fixtures/demonstrate.json
 
       - name: Run Django Tests
         run:  docker-compose -f local.yml run django pytest
