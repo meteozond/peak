@@ -5,7 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from django.core.cache import cache
+from django.utils.cache import get_cache_key
+from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import cache_page
 
 from ..models import Location
 from .paginators import LocationsGEOPagination
@@ -35,6 +39,16 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
     queryset = Location.objects.all().prefetch_related('company', 'locservice_set__service')
     pagination_class = LocationsGEOPagination
 
+    def dispatch(self, request, *args, **kwargs):
+        response = super(LocationsViewSet, self).dispatch(request, *args, **kwargs)
+        # инвалидация кеша при создании или обновлении локации
+        if self.request.method in ['POST', 'PUT', 'PATCH', ]:
+            cache.clear()
+            key = get_cache_key(self.request)
+            if cache.get(key):
+                cache.delete(key)
+        return response
+
     @extend_schema(
         parameters=[
             OpenApiParameter(
@@ -51,6 +65,7 @@ class LocationsViewSet(mixins.RetrieveModelMixin,
             ),
         ],
     )
+    @method_decorator(cache_page(60 * 60))
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
 

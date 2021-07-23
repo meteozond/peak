@@ -5,7 +5,6 @@ from django.test import TestCase
 from django.urls import reverse
 
 from peak.core.tests.mixins import AddressTestMixin, APIAuthTestMixin
-from peak.locations.api.serializers import LocationSerializer
 from peak.locations.models import Company, Location, LocService, Service
 from peak.locations.tests.factories import (LocWithServiceFactory,
                                             ServiceFactory)
@@ -110,4 +109,10 @@ class TestLocationsAPIView(AddressTestMixin, APIAuthTestMixin, TestCase):
         message = 'Дополнительная услуга не создалась'
         self.assertNotEqual(old_service_count, new_service_count, message)
 
-# TODO: доделать тесты
+    def test_cache(self):
+        url = reverse('api:locations-list')
+        loc_count = self.client.get(url, format='json').json()['count']
+        self.client.post(url, data=self.payload, format='json')
+        new_loc_count = self.client.get(url, format='json').json()['count']
+        message = 'Инвалидация кеша не работает'
+        self.assertEqual(loc_count + 1, new_loc_count, message)
